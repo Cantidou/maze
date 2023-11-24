@@ -1,4 +1,5 @@
 maze = []
+crossroads = []
 
 with open('maze.csv', 'r') as MAZE_FILE:
     for line in MAZE_FILE:
@@ -12,7 +13,6 @@ maze[len(maze) - 2][len(maze) - 2] = 'E'
 # Start position
 maze[1][1] = '@'
 
-crossroads = []
 
 def step():
     for i in range(0, len(maze)):
@@ -40,7 +40,7 @@ def step():
                 return variants
 
             def make_step(func: list):
-                print(func)
+                # print(func)
                 if len(func) == 1:
                     match func[0]:
                         case 'UP':
@@ -77,14 +77,17 @@ def step():
                 if func[0] == 'EXIT':
                     maze[i][maze[i].index('@')] = 'X'
                     maze[len(maze) - 2][len(maze) - 2] = '@'
-                print(crossroads)
+                    print('EXIT FOUNDED!')
 
             make_step(check_step())
             break
 
 
-for i in range(1, 638):
+while maze[len(maze) - 2][len(maze) - 2] == 'E':
     step()
+
+# for i in range(1, 638):
+#     step()
 
 for i in maze:
     print(i)
