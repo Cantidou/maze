@@ -14,10 +14,16 @@ maze[len(maze) - 2][len(maze) - 2] = 'E'
 maze[1][1] = '@'
 
 
-def step():
+while maze[len(maze) - 2][len(maze) - 2] == 'E':
     for i in range(0, len(maze)):
         if '@' in maze[i]:
             def check_step():
+                '''
+                checks the possibility of a move and returns variants
+                if there are no variants - returns 'END'
+                if function find 'E' returns 'EXIT'
+                :return:
+                '''
                 variants = []
                 if maze[i - 1][maze[i].index('@')] == '0':  # if it can go UP
                     variants.append('UP')
@@ -40,7 +46,14 @@ def step():
                 return variants
 
             def make_step(func: list):
-                # print(func)
+                '''
+                take variants of moving from check_step() and makes step
+                if more than 1 variant then save coordinates in crossroad
+                then if check_step() returns 'END', function returns to the crossroads
+                then if
+                :param func:
+                :return:
+                '''
                 if len(func) == 1:
                     match func[0]:
                         case 'UP':
@@ -81,13 +94,6 @@ def step():
 
             make_step(check_step())
             break
-
-
-while maze[len(maze) - 2][len(maze) - 2] == 'E':
-    step()
-
-# for i in range(1, 638):
-#     step()
 
 for i in maze:
     print(i)
